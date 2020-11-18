@@ -18,16 +18,16 @@ type PWD struct {
 	Pwd          string
 }
 
-func GetNewPassword() *PWD {
+func GetNewPassword(pwd string) (*PWD, error) {
 	salt := genID2()
-	pwd := genID()
+	//pwd := genID()
 	pwdMD5 := encodeMD5(pwd)
-	passwordHash, _ := genPasswordHash(pwdMD5, salt, MinPasswordCost)
+	passwordHash, err := genPasswordHash(pwdMD5, salt, MinPasswordCost)
 	return &PWD{
 		Salt:         salt,
 		Pwd:          pwd,
 		PasswordHash: passwordHash,
-	}
+	}, err
 }
 
 func CheckPassword(password, passwordHash, salt string) (bool, error) {
@@ -43,11 +43,11 @@ func genPasswordHash(pwd string, salt string, cost int) (string, error) {
 	return string(bb), err
 }
 func genPassword() string {
-	id := genID()
+	id := GenID()
 	return id[len(id)-8:]
 }
 
-func genID() string {
+func GenID() string {
 	return xid.New().String()
 }
 
