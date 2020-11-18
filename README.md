@@ -13,7 +13,8 @@ import (
 
 func main() {
 	//get new password
-	pwdInfo := password.GetNewPassword()
+	pwd := password.GenID()
+	pwdInfo := password.GetNewPassword(pwd)
 	// check password
 	result, err := password.CheckPassword(pwdInfo.Pwd, pwdInfo.PasswordHash, pwdInfo.Salt)
 	if err != nil {
