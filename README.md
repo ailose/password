@@ -13,9 +13,9 @@ import (
 
 func main() {
 	//get new password
-	pwdInfo := GetNewPassword()
+	pwdInfo := password.GetNewPassword()
 	// check password
-	result, err := CheckPassword(pwdInfo.Pwd, pwdInfo.PasswordHash, pwdInfo.Salt)
+	result, err := password.CheckPassword(pwdInfo.Pwd, pwdInfo.PasswordHash, pwdInfo.Salt)
 	if err != nil {
 		log.Fatal("check password err:", err)
 	}
