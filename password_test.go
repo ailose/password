@@ -4,9 +4,19 @@ import (
 	"testing"
 )
 
+func TestGenID(t *testing.T) {
+	//get new password
+	pwd := GenID()
+	_, err := GetNewPassword(pwd)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestGetNewPassword(t *testing.T) {
 	//get new password
-	_, err := GetNewPassword()
+	pwd := GenID()
+	_, err := GetNewPassword(pwd)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14,7 +24,8 @@ func TestGetNewPassword(t *testing.T) {
 
 func TestCheckPassword(t *testing.T) {
 	//get new password
-	pwdInfo, err := GetNewPassword()
+	pwd := GenID()
+	pwdInfo, err := GetNewPassword(pwd)
 	if err != nil {
 		t.Fatal(err)
 	}
